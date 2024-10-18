@@ -1,21 +1,22 @@
-name: deploy pipeline
+name: Lint React Codebase
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-18.04
+  eslint:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+          node-version: '16'
+
       - name: Install dependencies
         run: npm install
-      - name: Lint
-        run: npm run eslint
+
+      - name: Run ESLint
+        run: npx eslint 'src/**/*.js'
