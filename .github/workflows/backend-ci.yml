@@ -50,5 +50,8 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
         working-directory: backend    # ultima actuacion (crear el archivo requirement.txt)
+      
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+        working-directory: backend
 
-          
